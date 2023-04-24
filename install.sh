@@ -2,7 +2,8 @@
 #install mosquitto mqtt broker
 echo "install mosquitto"
 apt-get update
-apt-get install mosquitto mosquitto-clients -y
+apt-get install mosquitto mosquitto-clients python3-pip -y
+pip3 install paho-mqtt
 systemctl enable mosquitto.service
 
 #set up username/password
