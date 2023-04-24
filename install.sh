@@ -1,13 +1,11 @@
 #!/bin/bash
 #install mosquitto mqtt broker
-echo "install mosquitto"
 apt-get update
 apt-get install mosquitto mosquitto-clients python3-pip -y
 pip3 install paho-mqtt
 systemctl enable mosquitto.service
 
 #set up username/password
-echo "configure username/password"
 source .credentials
 mosquitto_passwd -c -b /etc/mosquitto/passwd $USERNAME $PASSWORD
 #force use of username/password
@@ -16,13 +14,10 @@ echo "allow_anonymous false" >> /etc/mosquitto/conf.d/default.conf
 echo "password_file /etc/mosquitto/passwd" >> /etc/mosquitto/conf.d/default.conf
 
 #restart mosquitto service
-echo "restart mosquitto"
 systemctl restart mosquitto.service
 
 #create heartbeat.service
-echo "setup service"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-rm /etc/systemd/system/heartbeat.service
 touch /etc/systemd/system/heartbeat.service
 echo "[Unit]
 Descirption=MQTT Heartbeat Message
