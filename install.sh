@@ -12,6 +12,7 @@ mosquitto_passwd -c -b /etc/mosquitto/passwd $USERNAME $PASSWORD
 touch /etc/mosquitto/conf.d/default.conf
 echo "allow_anonymous false" >> /etc/mosquitto/conf.d/default.conf
 echo "password_file /etc/mosquitto/passwd" >> /etc/mosquitto/conf.d/default.conf
+echo "listener 1883" >> /etc/mosquitto/conf.d/default.conf
 
 #restart mosquitto service
 systemctl restart mosquitto.service
